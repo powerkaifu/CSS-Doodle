@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <title>CSS-Doodle</title>
+        <style>
+            body {
+                font-family: 'Microsoft Jhenghei';
+            }
+
+        </style>
+    </head>
+    <body class="vw-100 vh-100 overflow-hidden d-flex justify-content-center align-items-center">
+        <div class="container position-relative text-white rounded" style="z-index:1;">
+            <h2 class="mb-2 p-2 d-inline-block" style="background-color:rgba(0,0,0,0.3)";">CSS-Doolde 目錄</h2>
+            <div class="row py-3">
+                <div class="col"><a class="btn btn-lg btn-dark" href="sakura.html" target="_blank">櫻花</a></div>
+                <div class="col"><a class="btn btn-lg btn-dark disabled" href="#">Empty</a></div>
+                <div class="col"><a class="btn btn-lg btn-dark disabled" href="#">Empty</a></div>
+                <div class="col"><a class="btn btn-lg btn-dark disabled" href="#">Empty</a></div>
+                <div class="col"><a class="btn btn-lg btn-dark disabled" href="#">Empty</a></div>
+                <div class="col"><a class="btn btn-lg btn-dark disabled" href="#">Empty</a></div>
+            </div>
+        </div>
+
+        <css-doodle>
+            :doodle { 
+                @grid: 50 / 100vmax; 
+                background: #0a0c27; 
+                font-family: sans-serif; 
+                position:absolute; 
+                top:0; left:0; 
+                z-index:0; 
+            } 
+            
+            @random { border-top: 1px solid #60569e; }
+            @random { border-left: 1px solid #60569e; }
+            @random(.2) {
+              :after {
+                content: '';
+                background: hsl(@rand(360), 60%, 70%);
+                @size: @rand(3px);
+              }
+            } 
+        </css-doodle>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- others -->
+        <script src="js/css-doodle.min.js"></script>
+    </body>
+</html>
