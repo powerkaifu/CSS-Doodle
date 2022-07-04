@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.css" />
+  <title>Doodle + CSS混合模式(使用影片)</title>
+  <style>
+    * {
+      transition: 0.5s;
+    }
+
+    #Charcter {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* .bg {
+      background: url(./images/bg-1.jpg) no-repeat center/cover;
+    } */
+
+    .Kyoujurou {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.1)) drop-shadow(0 0 20px rgba(255, 0, 0, 0.2)) drop-shadow(0 0 50px rgba(255, 0, 0, 0.3));
+      width: 100%;
+      height: 100%;
+    }
+
+    .Kyoujurou img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .Kyoujurou_word_1 {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 10;
+    }
+
+    .Kyoujurou_word_1 img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: 100% 0;
+    }
+
+    .Kyoujurou_word_2 {
+      display: none;
+    }
+
+    .fire_dust {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      top: 90%;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      mix-blend-mode: lighten;
+    }
+
+    .fire_flower {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      object-fit: cover;
+      mix-blend-mode: lighten;
+    }
+
+    .blade_fire {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      object-fit: cover;
+      mix-blend-mode: lighten;
+    }
+
+    /* 左下 */
+    .fire1 {
+      width: 100%;
+      height: 160%;
+      transform: rotate(45deg);
+      transform-origin: center top;
+      position: absolute;
+      left: 0;
+      z-index: 3;
+      mix-blend-mode: lighten;
+      object-fit: cover;
+    }
+
+    /* 右下 */
+    .fire2 {
+      width: 100%;
+      height: 160%;
+      transform: rotate(-45deg);
+      transform-origin: center top;
+      position: absolute;
+      right: 0;
+      z-index: 3;
+      mix-blend-mode: lighten;
+      object-fit: cover;
+    }
+
+    /* .move {
+      animation: move 10s infinite linear;
+    } */
+
+    @keyframes move {
+      from {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(10px) scale(1.05);
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width:576px) {
+      .Kyoujurou_word_1 {
+        display: none;
+      }
+
+      .Kyoujurou_word_2 {
+        display: block;
+        position: absolute;
+        bottom: 3%;
+        left: 50%;
+        z-index: 3;
+        transform: translateX(-50%);
+      }
+
+      .Kyoujurou img {
+        object-position: 30% 0;
+      }
+
+      .blade_fire {
+        left: 30%;
+        top: 60%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+</head>
+
+<body class="vw-100 vh-100">
+  <!-- 角色區 -->
+  <div id="Charcter" class="bg">
+    <!-- 圖片 -->
+    <div class="Kyoujurou"><img class="move" src="./images/Kyoujurou-3.png"></div>
+    <!-- 文字 -->
+    <div class="Kyoujurou_word_1"><img src="./images/Kyoujurou_word_1.png"></div>
+    <div class="Kyoujurou_word_2"><img src="./images/Kyoujurou_word_2.png"></div>
+    <!-- 影片 -->
+    <video class="fire1" src="./images/fire.mp4" muted autoplay></video>
+    <video class="fire2" src="./images/fire.mp4" muted autoplay></video>
+    <video class="fire_dust" src="./images/fire_dust.mp4" muted autoplay loop></video>
+    <video class="fire_flower" src="./images/fire_flower.mp4" muted autoplay loop></video>
+    <video class="blade_fire" src="./images/blade_fire.mp4" muted autoplay></video>
+  </div>
+
+  <!-- doodle 區 -->
+  <css-doodle class="position-fixed overflow-hidden w-100 h-100" style="z-index:10;">
+    :doodle{
+    @grid: 10 / 100vmax;
+    }
+
+    @size:@rand(5,20)px;
+    background:url(./images/@pick(1,2,3).png);
+    background-size:cover;
+    background-repeat:no-repeat;
+
+    transform:rotate(@rand(0,360)deg);
+    position:absolute;
+    bottom:-10%;
+    left:@rand(0,100)%;
+
+    animation:dot 60s infinite @rand(0,60)s;
+
+    @keyframes dot {
+    0%{
+    bottom:0;
+    left:@rand(-20,100)%;
+    opacity:1;
+    transform:scale(1);
+    }
+
+    50%{
+    opacity:@rand(0.3, 1);
+    transform:scale(1.3);
+    }
+
+    100%{
+    bottom:150%;
+    left:@rand(0,110)%;
+    opacity:1;
+    transform:scale(0.1);
+    }
+    }
+  </css-doodle>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./js/jquery-3.5.1.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <!-- others -->
+  <!-- <script src="https://unpkg.com/css-doodle@0.8.5/css-doodle.min.js"></script> -->
+  <script src="https://unpkg.com/css-doodle@0.12.1/css-doodle.min.js"></script>
+  <script>
+    // 刀的火焰
+    // ended 影片播放結束事件
+    $('.blade_fire').on('ended', function () {
+      $('.blade_fire').animate({ 'opacity': 0 }, { duration: 0 })
+    })
+
+    setInterval(function () {
+      $('.blade_fire').css({ 'display': 'block' }).animate({ 'opacity': 1 }, { duration: 1000 }).trigger('play');
+      $('.blade_fire').on('ended', function () {
+        $('.blade_fire').animate({ 'opacity': 0 }, { duration: 0 });
+      })
+    }, randomPlay(20));
+
+    // 左下火焰，右下火焰
+    $('.fire1,.fire2').on('ended', function () {
+      $('.fire1,.fire2').animate({ 'opacity': 0 }, { duration: 0 })
+    })
+
+    setInterval(function () {
+      $('.fire1,.fire2').css({ 'display': 'block' }).animate({ 'opacity': 1 }, { duration: 1000 }).trigger('play');
+      $('.fire1,.fire2').on('ended', function () {
+        $('.fire1,.fire2').animate({ 'opacity': 0 }, { duration: 0 });
+      })
+    }, randomPlay(60));
+
+    // 隨機一段時間
+    function randomPlay(num) {
+      return Math.floor((Math.random() * 30 * 1000) + (num * 1000))
+    }
+    // 優化程式 - 播放動畫
+    // function play(selector) {
+    //   setInterval(function () {
+    //     $(selector).css({ 'display': 'block' }).animate({ 'opacity': 1 }, { duration: 1000 }).trigger('play');
+    //     $(selector).on('ended', function () {
+    //       $(selector).animate({ 'opacity': 0 }, { duration: 0 })
+    //     })
+    //   }, randomPlay(60))
+    // }
+
+    // play('.blade_fire')
+    // play('.fire1,.fire2')
+
+
+
+
+  </script>
+</body>
+
+</html>
